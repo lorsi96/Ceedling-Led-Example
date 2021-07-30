@@ -24,13 +24,13 @@
 typedef uint16_t LedGroup_led_t;
 
 typedef struct {
-  uint16_t port;
+  uint16_t* port;
 } LedGroup_obj_t;
 
 /* ****************************************************************************************************************** */
 /*                                                  Public Functions                                                  */
 /* ****************************************************************************************************************** */
-void LedGroup_init(LedGroup_obj_t* ledGroup);
+void LedGroup_init(LedGroup_obj_t* ledGroup, uint64_t portAddress);
 
 void LedGroup_turnOn(LedGroup_obj_t* ledGroup, LedGroup_led_t led);
 
@@ -39,6 +39,8 @@ void LedGroup_turnOff(LedGroup_obj_t* ledGroup, LedGroup_led_t led);
 void LedGroup_setAllOn(LedGroup_obj_t* ledGroup);
 
 void LedGroup_setAllOff(LedGroup_obj_t* ledGroup);
+
+bool LegGroup_getLedState(LedGroup_obj_t* ledGroup, LedGroup_led_t led);
 
 /* ****************************************************************************************************************** */
 /*                                                   End of Module                                                    */
