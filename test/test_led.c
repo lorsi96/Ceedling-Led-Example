@@ -23,9 +23,9 @@ void tearDown() {}
 /* ****************************************************************************************************************** */
 
 void test_LedsOffAfterCreate() {
-  port = ALL_LEDS_ON;
+  port = 0xFFFF;
   LedGroup_init(&ledGroup, (uint64_t)&port);
-  TEST_ASSERT_EQUAL_HEX16(ALL_LEDS_OFF, port);
+  TEST_ASSERT_EQUAL_HEX16(0x0000, port);
 }
 
 void test_TurnOnLed() {
@@ -38,22 +38,22 @@ void test_TurnOffLed() {
   LedGroup_led_t led = 3;
   LedGroup_turnOn(&ledGroup, led);
   LedGroup_turnOff(&ledGroup, led);
-  TEST_ASSERT_EQUAL_HEX16(ALL_LEDS_OFF, port);
+  TEST_ASSERT_EQUAL_HEX16(0x0000, port);
 }
 
 void test_TurnOnAllLeds() {
   LedGroup_setAllOn(&ledGroup);
-  TEST_ASSERT_EQUAL_HEX16(ALL_LEDS_ON, port);
+  TEST_ASSERT_EQUAL_HEX16(0xFFFF, port);
 }
 
 void test_TurnOffAllLeds() {
   LedGroup_setAllOn(&ledGroup);
   LedGroup_setAllOff(&ledGroup);
-  TEST_ASSERT_EQUAL_HEX16(ALL_LEDS_OFF, port);
+  TEST_ASSERT_EQUAL_HEX16(0x0000, port);
 }
 
 void test_FullLedSequence() {
-  uint16_t expected = ALL_LEDS_OFF;
+  uint16_t expected = 0x0000;
   for (uint8_t i = MIN_LED_IND; i <= MAX_LED_IND; i++) {
     LedGroup_turnOn(&ledGroup, i);
     expected |= 1 << (i - 1);
